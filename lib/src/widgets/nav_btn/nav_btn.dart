@@ -1,0 +1,40 @@
+import 'package:flutter/material.dart';
+
+import '../../../gen/assets.gen.dart';
+
+class NavBtn extends StatelessWidget {
+  final Widget child;
+  final VoidCallback onTap;
+  final double? width;
+  final double? height;
+  final EdgeInsets padding;
+
+  const NavBtn({
+    super.key,
+    required this.child,
+    required this.onTap,
+    this.width,
+    this.height, required this.padding,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: padding,
+        width: width ?? 75.0,
+        height: height ?? 75.0,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: AssetImage(
+              Assets.images.navBtn.path,
+            ),
+          ),
+        ),
+        child: child,
+      ),
+    );
+  }
+}
