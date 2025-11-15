@@ -43,14 +43,60 @@ class $AssetsImagesGen {
   /// File path: assets/images/btn.png
   AssetGenImage get btn => const AssetGenImage('assets/images/btn.png');
 
+  /// File path: assets/images/burst_egg.png
+  AssetGenImage get burstEgg =>
+      const AssetGenImage('assets/images/burst_egg.png');
+
   /// File path: assets/images/coin.png
   AssetGenImage get coin => const AssetGenImage('assets/images/coin.png');
+
+  /// File path: assets/images/crimson_egg.png
+  AssetGenImage get crimsonEgg =>
+      const AssetGenImage('assets/images/crimson_egg.png');
+
+  /// File path: assets/images/fire_circle.png
+  AssetGenImage get fireCircle =>
+      const AssetGenImage('assets/images/fire_circle.png');
+
+  /// File path: assets/images/fire_egg.png
+  AssetGenImage get fireEgg =>
+      const AssetGenImage('assets/images/fire_egg.png');
+
+  /// File path: assets/images/game_field_bg.png
+  AssetGenImage get gameFieldBg =>
+      const AssetGenImage('assets/images/game_field_bg.png');
+
+  /// File path: assets/images/green_egg.png
+  AssetGenImage get greenEgg =>
+      const AssetGenImage('assets/images/green_egg.png');
 
   /// File path: assets/images/hen.png
   AssetGenImage get hen => const AssetGenImage('assets/images/hen.png');
 
+  /// File path: assets/images/ice_egg.png
+  AssetGenImage get iceEgg => const AssetGenImage('assets/images/ice_egg.png');
+
+  /// File path: assets/images/lemon_egg.png
+  AssetGenImage get lemonEgg =>
+      const AssetGenImage('assets/images/lemon_egg.png');
+
   /// File path: assets/images/nav_btn.png
   AssetGenImage get navBtn => const AssetGenImage('assets/images/nav_btn.png');
+
+  /// File path: assets/images/orange_white_egg.png
+  AssetGenImage get orangeWhiteEgg =>
+      const AssetGenImage('assets/images/orange_white_egg.png');
+
+  /// File path: assets/images/purple_egg.png
+  AssetGenImage get purpleEgg =>
+      const AssetGenImage('assets/images/purple_egg.png');
+
+  /// File path: assets/images/red_egg.png
+  AssetGenImage get redEgg => const AssetGenImage('assets/images/red_egg.png');
+
+  /// File path: assets/images/red_white_egg.png
+  AssetGenImage get redWhiteEgg =>
+      const AssetGenImage('assets/images/red_white_egg.png');
 
   /// File path: assets/images/rooster.png
   AssetGenImage get rooster => const AssetGenImage('assets/images/rooster.png');
@@ -59,15 +105,53 @@ class $AssetsImagesGen {
   AssetGenImage get wallInFlame =>
       const AssetGenImage('assets/images/wall_in_flame.png');
 
+  /// File path: assets/images/white_red_egg.png
+  AssetGenImage get whiteRedEgg =>
+      const AssetGenImage('assets/images/white_red_egg.png');
+
+  /// File path: assets/images/white_star_pink_egg.png
+  AssetGenImage get whiteStarPinkEgg =>
+      const AssetGenImage('assets/images/white_star_pink_egg.png');
+
+  /// File path: assets/images/x10.png
+  AssetGenImage get x10 => const AssetGenImage('assets/images/x10.png');
+
+  /// File path: assets/images/x20.png
+  AssetGenImage get x20 => const AssetGenImage('assets/images/x20.png');
+
+  /// File path: assets/images/x30.png
+  AssetGenImage get x30 => const AssetGenImage('assets/images/x30.png');
+
+  /// File path: assets/images/x60.png
+  AssetGenImage get x60 => const AssetGenImage('assets/images/x60.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
     actionBtn,
     btn,
+    burstEgg,
     coin,
+    crimsonEgg,
+    fireCircle,
+    fireEgg,
+    gameFieldBg,
+    greenEgg,
     hen,
+    iceEgg,
+    lemonEgg,
     navBtn,
+    orangeWhiteEgg,
+    purpleEgg,
+    redEgg,
+    redWhiteEgg,
     rooster,
     wallInFlame,
+    whiteRedEgg,
+    whiteStarPinkEgg,
+    x10,
+    x20,
+    x30,
+    x60,
   ];
 }
 

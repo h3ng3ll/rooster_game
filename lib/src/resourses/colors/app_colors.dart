@@ -15,6 +15,8 @@ enum AppColors {
   dimGray(Color(0xff696969)),
   limeGreen(Color(0xff1BC431)),
   laSalleGreen(Color(0xff007421)),
+  deepGreen(Color(0xff006B1E)),
+  kellyGreen(Color(0xff43B805)),
 
   white(Colors.white);
 

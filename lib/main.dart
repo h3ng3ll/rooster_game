@@ -5,14 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:rooster_game/src/bloc/app_observer.dart';
 import 'package:rooster_game/src/bloc/balance_bloc/balance_bloc.dart';
 import 'package:rooster_game/src/bloc/profile_bloc/profile_bloc.dart';
-import 'package:rooster_game/src/pages/change_level_page/change_level_page.dart';
-import 'package:rooster_game/src/pages/home_page/home_page.dart';
-import 'package:rooster_game/src/pages/info_page/info_page.dart';
-import 'package:rooster_game/src/pages/menu_page/menu_page.dart';
-import 'package:rooster_game/src/pages/privacy_policy_page/privacy_policy_page.dart';
-import 'package:rooster_game/src/pages/profile_page/profile_page.dart';
-import 'package:rooster_game/src/pages/splash_page/splash_page.dart';
-import 'package:rooster_game/src/pages/term_of_use_page/term_of_use_page.dart';
+import 'package:rooster_game/src/pages/game_page/game_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,7 +38,11 @@ class MyApp extends StatelessWidget {
             create: (_) => ProfileBloc(),
           ),
         ],
-        child: TermOfUsePage(),
+        child: GamePage(
+          args: GamePageArgs(
+            level: 1,
+          ),
+        ),
       ),
     );
   }
