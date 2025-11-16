@@ -3,7 +3,7 @@ import 'package:rooster_game/src/widgets/stroke_text.dart';
 
 import '../../gen/assets.gen.dart';
 
-class ActionBtn extends StatelessWidget {
+class ActionBtn extends StatefulWidget {
   final String text;
   final double? width;
   final double? height;
@@ -20,28 +20,42 @@ class ActionBtn extends StatelessWidget {
   });
 
   @override
+  State<ActionBtn> createState() => _ActionBtnState();
+}
+
+class _ActionBtnState extends State<ActionBtn> {
+  double _scale = 1.0;
+
+  @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(
-        25.5,
-      ),
-      onTap: onTap,
-      child: Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage(
-              Assets.images.actionBtn.path,
+    return GestureDetector(
+      onTapDown: (_) => setState(() => _scale = 0.95),
+      onTapUp: (_) => setState(() => _scale = 1.0),
+      onTapCancel: () => setState(() => _scale = 1.0),
+
+      onTap: widget.onTap,
+      child: AnimatedScale(
+        scale: _scale,
+        duration: Duration(
+          milliseconds: 100,
+        ),
+        child: Container(
+          width: widget.width,
+          height: widget.height,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage(
+                Assets.images.actionBtn.path,
+              ),
             ),
           ),
-        ),
-        child: Center(
-          child: StrokedText(
-            text,
-            fontSize: fontSize,
-            textAlign: TextAlign.center,
+          child: Center(
+            child: StrokedText(
+              widget.text,
+              fontSize: widget.fontSize,
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
       ),

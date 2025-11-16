@@ -45,6 +45,9 @@ dependencies:
   shared_preferences: ^2.5.3
   flame: ^1.33.0
   go_router: ^17.0.0
+  flame_bloc: ^1.12.18
+  fluttertoast: ^9.0.0
+  collection: ^1.19.1
 
 dev_dependencies:
   flutter_test:

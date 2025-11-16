@@ -8,20 +8,24 @@ class PauseNavBtn extends StatelessWidget {
   final VoidCallback onTap;
   final double? width;
   final double? height;
+  final EdgeInsets? padding;
 
   const PauseNavBtn({
     super.key,
     required this.onTap,
     this.width,
     this.height,
+    this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
     return NavBtn(
-      padding: EdgeInsets.symmetric(
-        vertical: 25.0,
-      ),
+      padding:
+          padding ??
+          EdgeInsets.symmetric(
+            vertical: 25.0,
+          ),
       width: width ?? 80.0,
       height: height ?? 80.0,
       onTap: onTap,

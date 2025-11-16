@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:rooster_game/src/pages/profile_page/widgets/user_profile.dart';
 import 'package:rooster_game/src/services/ui_overlay_service.dart';
 import 'package:rooster_game/src/widgets/action_btn.dart';
@@ -27,14 +28,6 @@ class _ProfilePageState extends State<ProfilePage> {
   final emailController = TextEditingController();
   final UIOverlayService _uIOverlayService = UIOverlayService.instance;
 
-  @override
-  void initState() {
-    final profile = context.read<ProfileBloc>().state.profile;
-    usernameController.text = profile.username;
-    emailController.text = profile.email;
-    image = profile.avatar;
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -43,7 +36,9 @@ class _ProfilePageState extends State<ProfilePage> {
     super.dispose();
   }
 
-  void onTapBack() {}
+  void onTapBack() {
+    context.pop();
+  }
 
   Future<void> onPickImage() async {
     final image = await _uIOverlayService.pickImage(
@@ -66,74 +61,87 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return WallInFlameBgWidget(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: CustomAppBar(
-          actions: [
-            BackNavBtn(
-              onTap: onTapBack,
-            ),
-            Spacer(),
-          ],
-        ),
-        body: Column(
-          children: [
-            Gap(40.0),
-            Expanded(
-              child: ContentContainer(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'PROFILE',
-                      style: TextStyle(
-                        fontSize: 28.0,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    Gap(50.0),
-                    Center(
-                      child: UserProfile(
-                        image: image,
-                        onPickImage: onPickImage,
-                      ),
-                    ),
-                    Gap(20.0),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 25.0,
-                      ),
-                      child: Column(
-                        spacing: 20.0,
-                        children: [
-                          CustomTextField(
-                            controller: usernameController,
-                            hintText: 'USERNAME',
-                          ),
-                          CustomTextField(
-                            controller: emailController,
-                            hintText: 'EMAIL',
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (context, state) {
+
+        if (usernameController.text != state.profile.username) {
+          usernameController.text = state.profile.username;
+        }
+        if (emailController.text != state.profile.email) {
+          emailController.text = state.profile.email;
+        }
+        image ??= state.profile.avatar;
+
+        return WallInFlameBgWidget(
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: CustomAppBar(
+              actions: [
+                BackNavBtn(
+                  onTap: onTapBack,
                 ),
-              ),
+                Spacer(),
+              ],
             ),
-            Gap(10.0),
-            ActionBtn(
-              onTap: onSave,
-              width: 290.0,
-              height: 140.0,
-              text: 'SAVE',
-              fontSize: 60,
+            body: Column(
+              children: [
+                Gap(40.0),
+                Expanded(
+                  child: ContentContainer(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'PROFILE',
+                          style: TextStyle(
+                            fontSize: 28.0,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        Gap(50.0),
+                        Center(
+                          child: UserProfile(
+                            image: image ?? state.profile.avatar,
+                            onPickImage: onPickImage,
+                          ),
+                        ),
+                        Gap(20.0),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 25.0,
+                          ),
+                          child: Column(
+                            spacing: 20.0,
+                            children: [
+                              CustomTextField(
+                                controller: usernameController,
+                                hintText: 'USERNAME',
+                              ),
+                              CustomTextField(
+                                controller: emailController,
+                                hintText: 'EMAIL',
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Gap(10.0),
+                ActionBtn(
+                  onTap: onSave,
+                  width: 290.0,
+                  height: 140.0,
+                  text: 'SAVE',
+                  fontSize: 60,
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

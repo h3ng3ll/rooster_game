@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rooster_game/src/animation/spark_animation.dart';
 
 import '../../../../gen/assets.gen.dart';
 import '../../../widgets/padding/horizontal_padding.dart';
@@ -13,18 +14,20 @@ class GameFieldBg extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: AssetImage(
-            Assets.images.gameFieldBg.path,
+    return SparkAnimation(
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.cover,
+            image: AssetImage(
+              Assets.images.gameFieldBg.path,
+            ),
           ),
         ),
-      ),
-      child: SafeArea(
-        child: HorizontalPadding(
-          child: child,
+        child: SafeArea(
+          child: HorizontalPadding(
+            child: child,
+          ),
         ),
       ),
     );

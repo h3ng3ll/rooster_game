@@ -55,13 +55,10 @@ extension SettingsEventPatterns on SettingsEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _ToggleNotification value)?  toggleNotification,TResult Function( _ToggleSound value)?  toggleSound,TResult Function( _ToggleVibration value)?  toggleVibration,TResult Function( _Update value)?  update,TResult Function( _Fetch value)?  fetch,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Update value)?  update,TResult Function( _Fetch value)?  fetch,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _ToggleNotification() when toggleNotification != null:
-return toggleNotification(_that);case _ToggleSound() when toggleSound != null:
-return toggleSound(_that);case _ToggleVibration() when toggleVibration != null:
-return toggleVibration(_that);case _Update() when update != null:
+case _Update() when update != null:
 return update(_that);case _Fetch() when fetch != null:
 return fetch(_that);case _:
   return orElse();
@@ -81,13 +78,10 @@ return fetch(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _ToggleNotification value)  toggleNotification,required TResult Function( _ToggleSound value)  toggleSound,required TResult Function( _ToggleVibration value)  toggleVibration,required TResult Function( _Update value)  update,required TResult Function( _Fetch value)  fetch,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Update value)  update,required TResult Function( _Fetch value)  fetch,}){
 final _that = this;
 switch (_that) {
-case _ToggleNotification():
-return toggleNotification(_that);case _ToggleSound():
-return toggleSound(_that);case _ToggleVibration():
-return toggleVibration(_that);case _Update():
+case _Update():
 return update(_that);case _Fetch():
 return fetch(_that);}
 }
@@ -103,13 +97,10 @@ return fetch(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _ToggleNotification value)?  toggleNotification,TResult? Function( _ToggleSound value)?  toggleSound,TResult? Function( _ToggleVibration value)?  toggleVibration,TResult? Function( _Update value)?  update,TResult? Function( _Fetch value)?  fetch,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Update value)?  update,TResult? Function( _Fetch value)?  fetch,}){
 final _that = this;
 switch (_that) {
-case _ToggleNotification() when toggleNotification != null:
-return toggleNotification(_that);case _ToggleSound() when toggleSound != null:
-return toggleSound(_that);case _ToggleVibration() when toggleVibration != null:
-return toggleVibration(_that);case _Update() when update != null:
+case _Update() when update != null:
 return update(_that);case _Fetch() when fetch != null:
 return fetch(_that);case _:
   return null;
@@ -128,13 +119,10 @@ return fetch(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  toggleNotification,TResult Function()?  toggleSound,TResult Function()?  toggleVibration,TResult Function()?  update,TResult Function()?  fetch,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( bool soundStatus,  bool notificationStatus,  bool vibrationStatus)?  update,TResult Function()?  fetch,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _ToggleNotification() when toggleNotification != null:
-return toggleNotification();case _ToggleSound() when toggleSound != null:
-return toggleSound();case _ToggleVibration() when toggleVibration != null:
-return toggleVibration();case _Update() when update != null:
-return update();case _Fetch() when fetch != null:
+case _Update() when update != null:
+return update(_that.soundStatus,_that.notificationStatus,_that.vibrationStatus);case _Fetch() when fetch != null:
 return fetch();case _:
   return orElse();
 
@@ -153,13 +141,10 @@ return fetch();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  toggleNotification,required TResult Function()  toggleSound,required TResult Function()  toggleVibration,required TResult Function()  update,required TResult Function()  fetch,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( bool soundStatus,  bool notificationStatus,  bool vibrationStatus)  update,required TResult Function()  fetch,}) {final _that = this;
 switch (_that) {
-case _ToggleNotification():
-return toggleNotification();case _ToggleSound():
-return toggleSound();case _ToggleVibration():
-return toggleVibration();case _Update():
-return update();case _Fetch():
+case _Update():
+return update(_that.soundStatus,_that.notificationStatus,_that.vibrationStatus);case _Fetch():
 return fetch();}
 }
 /// A variant of `when` that fallback to returning `null`
@@ -174,13 +159,10 @@ return fetch();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  toggleNotification,TResult? Function()?  toggleSound,TResult? Function()?  toggleVibration,TResult? Function()?  update,TResult? Function()?  fetch,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( bool soundStatus,  bool notificationStatus,  bool vibrationStatus)?  update,TResult? Function()?  fetch,}) {final _that = this;
 switch (_that) {
-case _ToggleNotification() when toggleNotification != null:
-return toggleNotification();case _ToggleSound() when toggleSound != null:
-return toggleSound();case _ToggleVibration() when toggleVibration != null:
-return toggleVibration();case _Update() when update != null:
-return update();case _Fetch() when fetch != null:
+case _Update() when update != null:
+return update(_that.soundStatus,_that.notificationStatus,_that.vibrationStatus);case _Fetch() when fetch != null:
 return fetch();case _:
   return null;
 
@@ -192,130 +174,72 @@ return fetch();case _:
 /// @nodoc
 
 
-class _ToggleNotification implements SettingsEvent {
-  const _ToggleNotification();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ToggleNotification);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'SettingsEvent.toggleNotification()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
-class _ToggleSound implements SettingsEvent {
-  const _ToggleSound();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ToggleSound);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'SettingsEvent.toggleSound()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
-class _ToggleVibration implements SettingsEvent {
-  const _ToggleVibration();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ToggleVibration);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'SettingsEvent.toggleVibration()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
 class _Update implements SettingsEvent {
-  const _Update();
+  const _Update({required this.soundStatus, required this.notificationStatus, required this.vibrationStatus});
   
 
+ final  bool soundStatus;
+ final  bool notificationStatus;
+ final  bool vibrationStatus;
 
-
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$UpdateCopyWith<_Update> get copyWith => __$UpdateCopyWithImpl<_Update>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Update);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Update&&(identical(other.soundStatus, soundStatus) || other.soundStatus == soundStatus)&&(identical(other.notificationStatus, notificationStatus) || other.notificationStatus == notificationStatus)&&(identical(other.vibrationStatus, vibrationStatus) || other.vibrationStatus == vibrationStatus));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,soundStatus,notificationStatus,vibrationStatus);
 
 @override
 String toString() {
-  return 'SettingsEvent.update()';
+  return 'SettingsEvent.update(soundStatus: $soundStatus, notificationStatus: $notificationStatus, vibrationStatus: $vibrationStatus)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$UpdateCopyWith<$Res> implements $SettingsEventCopyWith<$Res> {
+  factory _$UpdateCopyWith(_Update value, $Res Function(_Update) _then) = __$UpdateCopyWithImpl;
+@useResult
+$Res call({
+ bool soundStatus, bool notificationStatus, bool vibrationStatus
+});
 
 
+
+
+}
+/// @nodoc
+class __$UpdateCopyWithImpl<$Res>
+    implements _$UpdateCopyWith<$Res> {
+  __$UpdateCopyWithImpl(this._self, this._then);
+
+  final _Update _self;
+  final $Res Function(_Update) _then;
+
+/// Create a copy of SettingsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? soundStatus = null,Object? notificationStatus = null,Object? vibrationStatus = null,}) {
+  return _then(_Update(
+soundStatus: null == soundStatus ? _self.soundStatus : soundStatus // ignore: cast_nullable_to_non_nullable
+as bool,notificationStatus: null == notificationStatus ? _self.notificationStatus : notificationStatus // ignore: cast_nullable_to_non_nullable
+as bool,vibrationStatus: null == vibrationStatus ? _self.vibrationStatus : vibrationStatus // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
 
 /// @nodoc
 
@@ -352,7 +276,7 @@ String toString() {
 /// @nodoc
 mixin _$SettingsState {
 
- Settings? get settings; SettingsStatus get status; String get errorMessage;
+ Settings get settings; SettingsStatus get status; String get errorMessage;
 /// Create a copy of SettingsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -383,11 +307,11 @@ abstract mixin class $SettingsStateCopyWith<$Res>  {
   factory $SettingsStateCopyWith(SettingsState value, $Res Function(SettingsState) _then) = _$SettingsStateCopyWithImpl;
 @useResult
 $Res call({
- Settings? settings, SettingsStatus status, String errorMessage
+ Settings settings, SettingsStatus status, String errorMessage
 });
 
 
-$SettingsCopyWith<$Res>? get settings;
+$SettingsCopyWith<$Res> get settings;
 
 }
 /// @nodoc
@@ -400,10 +324,10 @@ class _$SettingsStateCopyWithImpl<$Res>
 
 /// Create a copy of SettingsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? settings = freezed,Object? status = null,Object? errorMessage = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? settings = null,Object? status = null,Object? errorMessage = null,}) {
   return _then(_self.copyWith(
-settings: freezed == settings ? _self.settings : settings // ignore: cast_nullable_to_non_nullable
-as Settings?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+settings: null == settings ? _self.settings : settings // ignore: cast_nullable_to_non_nullable
+as Settings,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as SettingsStatus,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -412,12 +336,9 @@ as String,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$SettingsCopyWith<$Res>? get settings {
-    if (_self.settings == null) {
-    return null;
-  }
-
-  return $SettingsCopyWith<$Res>(_self.settings!, (value) {
+$SettingsCopyWith<$Res> get settings {
+  
+  return $SettingsCopyWith<$Res>(_self.settings, (value) {
     return _then(_self.copyWith(settings: value));
   });
 }
@@ -499,7 +420,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Settings? settings,  SettingsStatus status,  String errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Settings settings,  SettingsStatus status,  String errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SettingsState() when $default != null:
 return $default(_that.settings,_that.status,_that.errorMessage);case _:
@@ -520,7 +441,7 @@ return $default(_that.settings,_that.status,_that.errorMessage);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Settings? settings,  SettingsStatus status,  String errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Settings settings,  SettingsStatus status,  String errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _SettingsState():
 return $default(_that.settings,_that.status,_that.errorMessage);}
@@ -537,7 +458,7 @@ return $default(_that.settings,_that.status,_that.errorMessage);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Settings? settings,  SettingsStatus status,  String errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Settings settings,  SettingsStatus status,  String errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _SettingsState() when $default != null:
 return $default(_that.settings,_that.status,_that.errorMessage);case _:
@@ -552,10 +473,10 @@ return $default(_that.settings,_that.status,_that.errorMessage);case _:
 
 
 class _SettingsState implements SettingsState {
-   _SettingsState({this.settings, this.status = SettingsStatus.loading, this.errorMessage = ''});
+   _SettingsState({required this.settings, this.status = SettingsStatus.loading, this.errorMessage = ''});
   
 
-@override final  Settings? settings;
+@override final  Settings settings;
 @override@JsonKey() final  SettingsStatus status;
 @override@JsonKey() final  String errorMessage;
 
@@ -589,11 +510,11 @@ abstract mixin class _$SettingsStateCopyWith<$Res> implements $SettingsStateCopy
   factory _$SettingsStateCopyWith(_SettingsState value, $Res Function(_SettingsState) _then) = __$SettingsStateCopyWithImpl;
 @override @useResult
 $Res call({
- Settings? settings, SettingsStatus status, String errorMessage
+ Settings settings, SettingsStatus status, String errorMessage
 });
 
 
-@override $SettingsCopyWith<$Res>? get settings;
+@override $SettingsCopyWith<$Res> get settings;
 
 }
 /// @nodoc
@@ -606,10 +527,10 @@ class __$SettingsStateCopyWithImpl<$Res>
 
 /// Create a copy of SettingsState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? settings = freezed,Object? status = null,Object? errorMessage = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? settings = null,Object? status = null,Object? errorMessage = null,}) {
   return _then(_SettingsState(
-settings: freezed == settings ? _self.settings : settings // ignore: cast_nullable_to_non_nullable
-as Settings?,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+settings: null == settings ? _self.settings : settings // ignore: cast_nullable_to_non_nullable
+as Settings,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as SettingsStatus,errorMessage: null == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -619,12 +540,9 @@ as String,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$SettingsCopyWith<$Res>? get settings {
-    if (_self.settings == null) {
-    return null;
-  }
-
-  return $SettingsCopyWith<$Res>(_self.settings!, (value) {
+$SettingsCopyWith<$Res> get settings {
+  
+  return $SettingsCopyWith<$Res>(_self.settings, (value) {
     return _then(_self.copyWith(settings: value));
   });
 }

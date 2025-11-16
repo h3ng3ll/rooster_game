@@ -5,18 +5,20 @@ class ContentContainer extends StatelessWidget {
   final Widget child;
   final double? width;
   final double? height;
+  final EdgeInsets? padding;
 
   const ContentContainer({
     super.key,
     required this.child,
     this.width,
     this.height,
+    this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(
+      padding: padding ?? EdgeInsets.all(
         12.0,
       ),
       width: width,

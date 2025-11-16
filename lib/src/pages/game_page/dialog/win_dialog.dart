@@ -12,6 +12,7 @@ class WinDialog extends StatelessWidget {
   final VoidCallback onTapHome;
   final VoidCallback onTapNext;
   final VoidCallback onTapRestart;
+  final bool hasNext;
 
   const WinDialog({
     super.key,
@@ -20,6 +21,7 @@ class WinDialog extends StatelessWidget {
     required this.onTapHome,
     required this.onTapNext,
     required this.onTapRestart,
+    required this.hasNext,
   });
 
   @override
@@ -91,16 +93,17 @@ class WinDialog extends StatelessWidget {
               ],
             ),
             Gap(60.0),
-            ActionBtn(
-              onTap: () {
-                Navigator.of(context).pop();
-                onTapNext();
-              },
-              width: 290.0,
-              height: 140.0,
-              text: 'NEXT',
-              fontSize: 40,
-            ),
+            if (hasNext)
+              ActionBtn(
+                onTap: () {
+                  Navigator.of(context).pop();
+                  onTapNext();
+                },
+                width: 290.0,
+                height: 140.0,
+                text: 'NEXT',
+                fontSize: 40,
+              ),
           ],
         ),
       ),

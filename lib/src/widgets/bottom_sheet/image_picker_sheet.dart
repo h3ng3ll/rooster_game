@@ -87,7 +87,7 @@ class ImagePickerSheet extends StatelessWidget {
                             ImageSource.gallery,
                           ),
                       child: Text(
-                        'MAKE A PHOTO',
+                        'CHOOSE PHOTO',
                         style: style.copyWith(
                           color: AppColors.black.value,
                         ),

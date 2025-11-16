@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -9,22 +8,29 @@ import 'package:rooster_game/src/widgets/nav_btn/nav_btn.dart';
 import '../../../../gen/assets.gen.dart';
 
 class UserProfile extends StatelessWidget {
-  final VoidCallback onPickImage;
+  final VoidCallback? onPickImage;
   final Uint8List? image;
-
+  final bool enabledIconBtn;
+  final double? width;
+  final double? height;
+  final EdgeInsets? padding;
   const UserProfile({
     super.key,
-    required this.onPickImage,
+     this.onPickImage,
     this.image,
+    this.height,
+    this.width,
+    this.padding,
+    this.enabledIconBtn = true,
   });
 
   @override
   Widget build(BuildContext context) {
     return NavBtn(
-      width: 200,
-      height: 200,
+      width: width  ?? 200,
+      height: height ??  200,
       onTap: onPickImage,
-      padding: EdgeInsets.all(
+      padding: padding ?? EdgeInsets.all(
         25.0,
       ),
       // child: Container(),
@@ -38,7 +44,9 @@ class UserProfile extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             )
-          : buildEditIcon(),
+          : enabledIconBtn
+          ? buildEditIcon()
+          : Container(),
     );
   }
 

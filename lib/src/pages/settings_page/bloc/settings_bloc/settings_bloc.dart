@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rooster_game/src/databases/shared_prefs_database.dart';
 
 import '../../../../models/settings/settings.dart';
 
@@ -10,98 +13,52 @@ part 'settings_state.dart';
 part 'settings_bloc.freezed.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
+  final SharedPrefsDatabase _sharedPrefsDatabase = SharedPrefsDatabase.instance;
+  final _key = 'settings2';
+
   SettingsBloc()
     : super(
         SettingsState(
           settings: Settings(),
         ),
       ) {
-    on<_ToggleNotification>(_toggleNotification);
-    on<_ToggleSound>(_toggleSound);
-    on<_ToggleVibration>(_toggleVibration);
     on<_Fetch>(_fetch);
     on<_Update>(_update);
   }
 
-  void _toggleNotification(event, emit) async {
-    emit(
-      state.copyWith(
-        settings: state.settings!.copyWith(
-          notificationStatus: !state.settings!.notificationStatus,
-        ),
-      ),
-    );
-  }
-
-  void _toggleSound(event, emit) async {
-    emit(
-      state.copyWith(
-        settings: state.settings!.copyWith(
-          soundStatus: !state.settings!.soundStatus,
-        ),
-      ),
-    );
-  }
-
-  void _toggleVibration(event, emit) async {
-    emit(
-      state.copyWith(
-        settings: state.settings!.copyWith(
-          vibrationStatus: !state.settings!.vibrationStatus,
-        ),
-      ),
-    );
-  }
-
   void _fetch(event, emit) async {
-    try {
-      emit(
-        state.copyWith(
-          status: SettingsStatus.loading,
-        ),
-      );
-      // final data = event.e;
-      /// Todo:
-
-      emit(
-        state.copyWith(
-          status: SettingsStatus.initial,
-        ),
-      );
-    } catch (e) {
-      emit(
-        state.copyWith(
-          status: SettingsStatus.failed,
-          errorMessage: e.toString(),
-        ),
-      );
-      rethrow;
-    }
+    final value = await _sharedPrefsDatabase.getValue(
+      _key,
+    );
+    if (value == null) return;
+    final settings = Settings.fromJson(
+      jsonDecode(
+        value,
+      ),
+    );
+    emit(
+      state.copyWith(
+        settings: settings,
+      ),
+    );
   }
 
-  void _update(event, emit) async {
-    try {
-      emit(
-        state.copyWith(
-          status: SettingsStatus.loading,
+  void _update(_Update event, emit) async {
+    emit(
+      state.copyWith(
+        settings: state.settings.copyWith(
+          soundStatus: event.soundStatus,
+          vibrationStatus: event.vibrationStatus,
+          notificationStatus: event.notificationStatus,
         ),
-      );
-      // final data = event.e;
-      /// Todo:
-
-      emit(
-        state.copyWith(
-          status: SettingsStatus.initial,
-        ),
-      );
-    } catch (e) {
-      emit(
-        state.copyWith(
-          status: SettingsStatus.failed,
-          errorMessage: e.toString(),
-        ),
-      );
-      rethrow;
-    }
+      ),
+    );
+    final data = jsonEncode(
+      state.settings.toJson(),
+    );
+    await _sharedPrefsDatabase.setValue(
+      _key,
+      data,
+    );
   }
 }

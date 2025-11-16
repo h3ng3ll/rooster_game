@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:rooster_game/src/widgets/content_container.dart';
 import 'package:rooster_game/src/widgets/nav_btn/widets/back_nav_btn.dart';
 import 'package:rooster_game/src/widgets/wall_in_flame_bg_widget.dart';
@@ -9,7 +10,9 @@ import '../../widgets/custom_app_bar.dart';
 class InfoPage extends StatelessWidget {
   const InfoPage({super.key});
 
-  void onTapBack() {}
+  void onTapBack(BuildContext context) {
+    context.pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,9 @@ class InfoPage extends StatelessWidget {
         appBar: CustomAppBar(
           actions: [
             BackNavBtn(
-              onTap: onTapBack,
+              onTap: () => onTapBack(
+                context,
+              ),
             ),
             Spacer(),
           ],
@@ -34,9 +39,7 @@ class InfoPage extends StatelessWidget {
                   children: [
                     Text(
                       'HOW TO PLAY',
-                      style: TextStyle(
-                        fontSize: 28.0
-                      ),
+                      style: TextStyle(fontSize: 28.0),
                     ),
                   ],
                 ),

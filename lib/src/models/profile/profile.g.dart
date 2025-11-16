@@ -7,7 +7,7 @@ part of 'profile.dart';
 // **************************************************************************
 
 _Profile _$ProfileFromJson(Map<String, dynamic> json) => _Profile(
-  avatar: const Uint8ListConverter().fromJson(json['avatar']),
+  avatar: const Uint8ListConverter().fromJson(json['avatar'] as List?),
   username: json['username'] as String? ?? '',
   email: json['email'] as String? ?? '',
 );

@@ -53,7 +53,8 @@ class Egg extends SpriteComponent with TapCallbacks {
   int row;
   int col;
   bool isSelected = false;
-  static const double cellSize = 60.0;
+  // static const double cellSize = 52.0;
+  static const double cellSize = 52.0;
 
   Egg({
     required this.color,

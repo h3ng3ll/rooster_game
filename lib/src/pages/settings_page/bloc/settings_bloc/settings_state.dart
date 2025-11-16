@@ -9,7 +9,7 @@ enum SettingsStatus {
 @freezed
 sealed class SettingsState with _$SettingsState {
   factory SettingsState({
-    Settings? settings,
+    required Settings settings,
     @Default(SettingsStatus.loading) SettingsStatus status,
     @Default('') String errorMessage,
   }) = _SettingsState;

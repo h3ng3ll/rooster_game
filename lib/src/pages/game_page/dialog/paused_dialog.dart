@@ -1,25 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:rooster_game/src/pages/game_page/widgets/green_container.dart';
 import 'package:rooster_game/src/resourses/colors/app_colors.dart';
 
 import '../../../widgets/action_btn.dart';
 
 class PausedDialog extends StatelessWidget {
   final int score;
-  final int best;
   final VoidCallback onTapHome;
   final VoidCallback onTapRestart;
-  final VoidCallback onTapPlay;
 
   const PausedDialog({
     super.key,
     required this.score,
-    required this.best,
     required this.onTapHome,
     required this.onTapRestart,
-    required this.onTapPlay,
   });
 
   @override
@@ -72,8 +66,8 @@ class PausedDialog extends StatelessWidget {
             Gap(60.0),
             ActionBtn(
               onTap: () {
+                /// resume game
                 Navigator.of(context).pop();
-                onTapPlay();
               },
               width: 290.0,
               height: 140.0,

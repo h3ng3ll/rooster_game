@@ -4,7 +4,7 @@ import '../../../gen/assets.gen.dart';
 
 class NavBtn extends StatelessWidget {
   final Widget child;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final double? width;
   final double? height;
   final EdgeInsets padding;
@@ -12,7 +12,7 @@ class NavBtn extends StatelessWidget {
   const NavBtn({
     super.key,
     required this.child,
-    required this.onTap,
+    this.onTap,
     this.width,
     this.height, required this.padding,
   });

@@ -2,12 +2,15 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
+import 'package:rooster_game/src/pages/game_page/bloc/game_bloc/game_bloc.dart';
+import 'package:rooster_game/src/pages/game_page/flame_component/chicken_match_game.dart';
 import '../components/egg.dart';
 import '../systems/match_detector.dart';
 
 typedef GridEgg = List<List<Egg?>>;
 
-class GameBoard extends PositionComponent {
+class GameBoard extends PositionComponent
+    with HasGameReference<ChickenMatchGame> {
   final int gridSize;
   late GridEgg grid;
   final MatchDetector matchDetector = MatchDetector();
@@ -15,39 +18,26 @@ class GameBoard extends PositionComponent {
   Egg? selectedEgg;
   final Random random = Random();
 
-  // Коллбэки для UI
-  final Function(int score) onScoreChanged;
-  final Function(int moves) onMovesChanged;
-  final Function() onWin;
-  final Function() onLose;
-
-  int score = 0;
-  int moves = 0;
-  int targetScore = 1000;
-
   GameBoard({
     super.children,
     super.priority,
     super.key,
     required this.gridSize,
-    required this.onScoreChanged,
-    required this.onMovesChanged,
-    required this.onWin,
-    required this.onLose,
   });
 
   @override
   FutureOr<void> onLoad() async {
-    // Инициализируем сетку
+    /// Init grid
     grid = List.generate(
       gridSize,
-      (row) => List.generate(gridSize, (col) => null),
+      (row) => List.generate(
+        gridSize,
+        (col) => null,
+      ),
     );
 
-    // Заполняем доску
     await fillBoard();
 
-    // Проверяем начальные совпадения и удаляем их
     await removeInitialMatches();
   }
 
@@ -65,7 +55,11 @@ class GameBoard extends PositionComponent {
 
   Egg createRandomEgg(int row, int col) {
     // Получаем доступные цвета (избегаем создания начальных совпадений)
-    final availableColors = getAvailableColors(row, col);
+    final availableColors = getAvailableColors(
+      row,
+      col,
+    );
+
     final color = availableColors[random.nextInt(availableColors.length)];
 
     return Egg(
@@ -76,14 +70,15 @@ class GameBoard extends PositionComponent {
   }
 
   //
-  List<EggColor> getAvailableColors(int row, int col) {
+  List<EggColor> getAvailableColors(
+    int row,
+    int col,
+  ) {
     final allColors = EggColor.values.toList();
     final excludeColors = <EggColor>{};
 
-    // // Проверяем горизонталь (два слева)
-    // if (col >= 2 && grid[row][col - 1]?.color == grid[row][col - 2]?.color) {
-    //   excludeColors.add(grid[row][col - 1]!.color);
-    // }
+    /// Check horizontal (two in row)
+
     if (col >= 2) {
       final leftEgg1 = grid[row][col - 1];
       final leftEgg2 = grid[row][col - 2];
@@ -94,12 +89,7 @@ class GameBoard extends PositionComponent {
       }
     }
 
-    // // Проверяем вертикаль (два сверху)
-    // if (row >= 2 && grid[row - 1][col]?.color == grid[row - 2][col]?.color) {
-    //   excludeColors.add(grid[row - 1][col]!.color);
-    // }
-
-    // вертикаль
+    /// Check by vertical (two in column)
     if (row >= 2) {
       final up1 = grid[row - 1][col];
       final up2 = grid[row - 2][col];
@@ -108,28 +98,32 @@ class GameBoard extends PositionComponent {
       }
     }
     final available = allColors
-        .where((c) => !excludeColors.contains(c))
+        .where(
+          (c) => !excludeColors.contains(
+            c,
+          ),
+        )
         .toList();
     return available.isEmpty ? allColors : available;
   }
 
   Future<void> removeInitialMatches() async {
-    var matches = matchDetector.findMatches(grid);
+    List<Egg> matches = matchDetector.findMatches(
+      grid,
+    );
     while (matches.isNotEmpty) {
       for (final egg in matches) {
         grid[egg.row][egg.col] = null;
         egg.removeFromParent();
       }
       await fillBoard();
-      matches = matchDetector.findMatches(grid);
+      matches = matchDetector.findMatches(
+        grid,
+      );
     }
   }
 
-  //
   void onEggTapped(Egg egg) {
-    print(
-      'Selected egg ${selectedEgg?.col.toString()} ${selectedEgg?.row.toString()}',
-    );
 
     if (selectedEgg == null) {
       // Выбираем первое яйцо
@@ -159,8 +153,6 @@ class GameBoard extends PositionComponent {
   bool areNeighbors(Egg egg1, Egg egg2) {
     final rowDiff = (egg1.row - egg2.row).abs();
     final colDiff = (egg1.col - egg2.col).abs();
-    print('Egg1 Row : ${egg1.row + 1} Col : ${egg1.col + 1}');
-    print('Egg2 Row : ${egg2.row + 1} Col : ${egg2.col + 1}');
     return (rowDiff == 1 && colDiff == 0) || (rowDiff == 0 && colDiff == 1);
   }
 
@@ -185,33 +177,37 @@ class GameBoard extends PositionComponent {
 
   Future<void> handleSwap(Egg egg1, Egg egg2) async {
     await _swap(egg1, egg2);
-    // await processMatches();
-    // Проверяем совпадения
+
+    /// check matches
     final matches = matchDetector.findMatches(
       grid,
     );
 
+    /// if found matches
     if (matches.isNotEmpty) {
-      // Есть совпадения - обрабатываем их
-      moves--;
-      onMovesChanged.call(moves);
+      game.gameBloc.add(
+        GameEvent.decrementMove(),
+      );
       await processMatches();
-
-      checkGameEnd();
     }
   }
 
-  //
   Future<void> processMatches() async {
-    var matches = matchDetector.findMatches(grid);
+    var matches = matchDetector.findMatches(
+      grid,
+    );
 
     while (matches.isNotEmpty) {
-      // Удаляем совпадения
+      /// Remove matches
       for (final egg in matches) {
-        score += 10;
+        game.gameBloc.add(
+          GameEvent.addScore(
+            score: 10,
+          ),
+        );
         grid[egg.row][egg.col] = null;
 
-        // Анимация исчезновения
+        /// Fade animation
         await egg.add(
           ScaleEffect.to(
             Vector2.zero(),
@@ -221,16 +217,14 @@ class GameBoard extends PositionComponent {
         egg.removeFromParent();
       }
 
-      onScoreChanged.call(score);
-
-      // Опускаем яйца
       await dropEggs();
 
-      // Заполняем пустые места
       await fillEmptySpaces();
 
-      // Проверяем новые совпадения
-      matches = matchDetector.findMatches(grid);
+      /// Check if any matches after filling are present
+      matches = matchDetector.findMatches(
+        grid,
+      );
     }
   }
 
@@ -270,14 +264,6 @@ class GameBoard extends PositionComponent {
           await egg.moveTo(row, col);
         }
       }
-    }
-  }
-
-  void checkGameEnd() {
-    if (score >= targetScore) {
-      onWin.call();
-    } else if (moves <= 0) {
-      onLose.call();
     }
   }
 }
