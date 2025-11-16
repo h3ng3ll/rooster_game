@@ -239,7 +239,7 @@ lib/
 
 Design created in Figma:
 
-[Figma Link](https://www.figma.com/design/wBj3N2mJTLgwpXZFOB39Of/Rooster-Rush?node-id=0-1&t=vMUXiFKQPJQj5GiG-1)
+[Figma Link](https://www.figma.com/design/KqZFm2ihoJlXv8DUFzzjsu/Test-task?node-id=0-1&t=40sMk2AW1QtFA5no-1)
 
 
 
@@ -247,9 +247,9 @@ Design created in Figma:
 
 
 
-![Game Screenshot](https://www.dropbox.com/scl/fi/ulp84s2mzdhpu5gedxfxe/screenshot1.png?rlkey=kdfzwx0nl57i671npw28iqir0&e=1&st=6v1aa2lm&dl=1)
+![Game Screenshot](https://www.dropbox.com/scl/fi/ulp84s2mzdhpu5gedxfxe/screenshot1.png?rlkey=kdfzwx0nl57i671npw28iqir0&e=1&st=6v1aa2lm&dl=1&raw=1)
 
-![Game Screenshot](https://www.dropbox.com/scl/fi/a2nhtc2xe76lgkehra4l4/screenshot2.png?rlkey=1bwstj30wxsxsnatrxsd6e8bp&st=zhwpn7ov&dl=1)
+![Game Screenshot](https://www.dropbox.com/scl/fi/a2nhtc2xe76lgkehra4l4/screenshot2.png?rlkey=1bwstj30wxsxsnatrxsd6e8bp&st=zhwpn7ov&dl=1&raw=1)
 
 
 
@@ -283,7 +283,7 @@ canByAttempts: true, // Ability to buy attempts
 
 calculateAttemptAtMoves: false  // Penalty for each move
 
-)
+);
 
 ```
 
