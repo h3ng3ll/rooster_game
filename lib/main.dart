@@ -37,12 +37,7 @@ class MyApp extends StatelessWidget {
               ProfileEvent.load(),
             ),
         ),
-        BlocProvider(
-          create: (_) => GameStatBloc()
-            ..add(
-              GameStatEvent.loadStats(),
-            ),
-        ),
+
         BlocProvider(
           create: (_) => ShopBloc()
             ..add(
@@ -55,6 +50,14 @@ class MyApp extends StatelessWidget {
             ..add(
               SettingsEvent.fetch(),
             ),
+        ),
+        BlocProvider(
+          create: (context) =>
+              GameStatBloc(
+                settingsBloc: context.read<SettingsBloc>(),
+              )..add(
+                GameStatEvent.loadStats(),
+              ),
         ),
       ],
       child: MaterialApp.router(

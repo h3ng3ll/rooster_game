@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rooster_game/src/pages/settings_page/bloc/settings_bloc/settings_bloc.dart';
 import 'package:rooster_game/src/services/local_notification_service.dart';
 
 import '../../databases/shared_prefs_database.dart';
@@ -17,14 +18,18 @@ class GameStatBloc extends Bloc<GameStatEvent, GameStatState> {
   final SharedPrefsDatabase _sharedPrefsDatabase = SharedPrefsDatabase.instance;
   final LocalNotificationService _localNotificationService =
       LocalNotificationService.instance;
+  final SettingsBloc _settingsBloc;
+
   final _key = 'gameStat3';
 
-  GameStatBloc()
-    : super(
-        GameStatState(
-          gameStat: GameStat(),
-        ),
-      ) {
+  GameStatBloc({
+    required SettingsBloc settingsBloc,
+  }) : _settingsBloc = settingsBloc,
+       super(
+         GameStatState(
+           gameStat: GameStat(),
+         ),
+       ) {
     on<_UpdateBestScore>(_updateBestScore);
     on<_UnlockNextLevel>(_unlockNextLevel);
     on<_LoadStats>(_loadStats);
@@ -49,10 +54,13 @@ class GameStatBloc extends Bloc<GameStatEvent, GameStatState> {
         ),
       ),
     );
-    _localNotificationService.sendNotification(
-      'Game art',
-      'Congratulation. You\'ve got a new score ${event.score} ',
-    );
+    if (_settingsBloc.state.settings.notificationStatus) {
+      _localNotificationService.sendNotification(
+        'Game art',
+        'Congratulation. You\'ve got a new score ${event.score} ',
+      );
+    }
+
     _update();
   }
 
