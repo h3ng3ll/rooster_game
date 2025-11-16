@@ -7,7 +7,7 @@ A mobile match-3 game developed with Flutter and Flame Engine.
 
 
 
-![RoosterGame Screenshot](https://www.dropbox.com/scl/fi/ulp84s2mzdhpu5gedxfxe/screenshot1.png?rlkey=kdfzwx0nl57i671npw28iqir0&e=1&st=6v1aa2lm&dl=1)
+![RoosterGame Screenshot](screenshots/game.png)
 
 
 
@@ -247,9 +247,9 @@ Design created in Figma:
 
 
 
-![Game Screenshot](https://www.dropbox.com/scl/fi/ulp84s2mzdhpu5gedxfxe/screenshot1.png?rlkey=kdfzwx0nl57i671npw28iqir0&e=1&st=6v1aa2lm&dl=1&raw=1)
+![Game Process Screenshot](screenshots/game.png)
 
-![Game Screenshot](https://www.dropbox.com/scl/fi/a2nhtc2xe76lgkehra4l4/screenshot2.png?rlkey=1bwstj30wxsxsnatrxsd6e8bp&st=zhwpn7ov&dl=1&raw=1)
+![Shop Screenshot](screenshots/shop.png)
 
 
 
