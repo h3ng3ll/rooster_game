@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:rooster_game/src/pages/settings_page/bloc/settings_bloc/settings_bloc.dart';
 import 'package:rooster_game/src/pages/settings_page/bloc/widgets/settings_item.dart';
+import 'package:rooster_game/src/services/ui_message_service.dart';
 
 import '../../widgets/action_btn.dart';
 import '../../widgets/content_container.dart';
@@ -58,6 +59,9 @@ class _SettingsPageState extends State<SettingsPage> {
         notificationStatus: notificationStatus,
         vibrationStatus: vibrationStatus,
       ),
+    );
+    UiMessageService.showInfo(
+      'Settings updated successfully !',
     );
   }
 
