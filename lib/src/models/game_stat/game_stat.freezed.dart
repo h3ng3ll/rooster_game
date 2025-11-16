@@ -204,7 +204,7 @@ return $default(_that.bestScore,_that.currentLevel);case _:
 @JsonSerializable()
 
 class _GameStat extends GameStat {
-   _GameStat({this.bestScore = 0, this.currentLevel = 0}): super._();
+   _GameStat({this.bestScore = 0, this.currentLevel = 1}): super._();
   factory _GameStat.fromJson(Map<String, dynamic> json) => _$GameStatFromJson(json);
 
 @override@JsonKey() final  int bestScore;

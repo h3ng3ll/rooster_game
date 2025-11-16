@@ -103,7 +103,7 @@ final GoRouter initRouter = GoRouter(
               path: AppRoutesPaths.termOfUseRoute,
               name: AppRoutesPaths.termOfUseRoute,
               builder: (context, state) {
-                return TermOfUsePage();
+                return TermsOfUsePage();
               },
             ),
           ],

@@ -66,6 +66,7 @@ class UserProfile extends StatelessWidget {
         width: 27.0,
         height: 27.0,
         child: SvgPicture.asset(
+
           Assets.icons.edit,
         ),
       ),

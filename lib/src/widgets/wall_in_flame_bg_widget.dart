@@ -1,9 +1,8 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:rooster_game/src/animation/spark_animation.dart';
 import 'package:rooster_game/src/widgets/padding/horizontal_padding.dart';
 
 import '../../gen/assets.gen.dart';
+import 'animation/spark_animation.dart';
 
 
 

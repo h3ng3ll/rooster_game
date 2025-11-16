@@ -4,6 +4,7 @@ import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:rooster_game/src/pages/game_page/bloc/game_bloc/game_bloc.dart';
 import 'package:rooster_game/src/pages/game_page/flame_component/chicken_match_game.dart';
+import 'package:rooster_game/src/services/vibration_service.dart';
 import '../components/egg.dart';
 import '../systems/match_detector.dart';
 
@@ -14,6 +15,7 @@ class GameBoard extends PositionComponent
   final int gridSize;
   late GridEgg grid;
   final MatchDetector matchDetector = MatchDetector();
+  final VibrationService vibrationService = VibrationService.instance;
 
   Egg? selectedEgg;
   final Random random = Random();
@@ -124,7 +126,6 @@ class GameBoard extends PositionComponent
   }
 
   void onEggTapped(Egg egg) {
-
     if (selectedEgg == null) {
       // Выбираем первое яйцо
       selectedEgg = egg;
@@ -144,9 +145,6 @@ class GameBoard extends PositionComponent
       selectedEgg = egg;
       egg.setSelected(true);
     }
-    print(
-      'Selected egg ${(selectedEgg?.col).toString()} ${selectedEgg?.row.toString()}',
-    );
   }
 
   //
@@ -185,6 +183,9 @@ class GameBoard extends PositionComponent
 
     /// if found matches
     if (matches.isNotEmpty) {
+      if (game.settingsBloc.state.settings.vibrationStatus) {
+        vibrationService.vibrateShort();
+      }
       game.gameBloc.add(
         GameEvent.decrementMove(),
       );

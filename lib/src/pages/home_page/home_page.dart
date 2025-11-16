@@ -57,13 +57,15 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Stack(
           children: [
-            Positioned(
-              bottom: 80.0,
-              right: 0,
-              left: 0,
+            Align(
+              alignment: Alignment(0.0 , 0.1),
+              // bottom: 80.0,
+              // right: 0,
+              // left: 0,
               child: BuildRooster(
-                width: 100.0,
-                height: 620.0,
+
+                width: 260.0,
+                height: 420.0,
               ),
             ),
             Align(
@@ -75,10 +77,10 @@ class _HomePageState extends State<HomePage> {
                 onTap: () => onTapPlay(
                   context,
                 ),
-                width: 290.0,
+                width: 190.0,
                 height: 140.0,
                 text: 'PLAY',
-                fontSize: 60,
+                fontSize: 45,
               ),
             ),
           ],

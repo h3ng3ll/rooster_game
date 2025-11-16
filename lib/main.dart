@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rooster_game/src/bloc/app_observer.dart';
@@ -7,13 +8,19 @@ import 'package:rooster_game/src/bloc/profile_bloc/profile_bloc.dart';
 import 'package:rooster_game/src/pages/game_page/bloc/shop_bloc/shop_bloc.dart';
 import 'package:rooster_game/src/pages/settings_page/bloc/settings_bloc/settings_bloc.dart';
 import 'package:rooster_game/src/routes/init_router.dart';
+import 'package:rooster_game/src/services/local_notification_service.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.portraitUp,
+  ]);
 
   /// register global observer for debug convenient
   Bloc.observer = AppObserver.instance();
-
+  await LocalNotificationService.instance.init();
   runApp(const MyApp());
 }
 

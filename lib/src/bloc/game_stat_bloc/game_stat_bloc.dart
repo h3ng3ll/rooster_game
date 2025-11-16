@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rooster_game/src/services/local_notification_service.dart';
 
 import '../../databases/shared_prefs_database.dart';
 import '../../models/game_stat/game_stat.dart';
@@ -14,7 +15,9 @@ part 'game_stat_bloc.freezed.dart';
 
 class GameStatBloc extends Bloc<GameStatEvent, GameStatState> {
   final SharedPrefsDatabase _sharedPrefsDatabase = SharedPrefsDatabase.instance;
-  final _key = 'bestScore';
+  final LocalNotificationService _localNotificationService =
+      LocalNotificationService.instance;
+  final _key = 'gameStat3';
 
   GameStatBloc()
     : super(
@@ -46,7 +49,10 @@ class GameStatBloc extends Bloc<GameStatEvent, GameStatState> {
         ),
       ),
     );
-
+    _localNotificationService.sendNotification(
+      'Game art',
+      'Congratulation. You\'ve got a new score ${event.score} ',
+    );
     _update();
   }
 

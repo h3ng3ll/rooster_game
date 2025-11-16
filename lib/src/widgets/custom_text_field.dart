@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -36,6 +35,9 @@ class CustomTextField extends StatelessWidget {
           fontSize: 16.0,
         ),
         textInputAction: TextInputAction.next,
+        onTapOutside: (_){
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
         decoration: InputDecoration(
           counterText: '',
           hintText: hintText,

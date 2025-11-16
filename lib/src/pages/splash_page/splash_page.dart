@@ -18,6 +18,7 @@ class SplashPage extends StatelessWidget {
           milliseconds: 300,
         ),
         color: AppColors.white.value,
+
       ),
     );
 
@@ -43,13 +44,15 @@ class SplashPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: Stack(
           children: [
-            Positioned(
-              bottom: 0,
-              right: 0,
-              left: 0,
+            Align(
+              alignment: Alignment(0.0 , 0.9),
+              // bottom: 80.0,
+              // right: 0,
+              // left: 0,
               child: BuildRooster(
-                width: 300.0,
-                height: 760.0,
+
+                width: 270.0,
+                height: 440.0,
               ),
             ),
             Positioned(

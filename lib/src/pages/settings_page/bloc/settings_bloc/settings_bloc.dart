@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:rooster_game/src/databases/shared_prefs_database.dart';
+import 'package:rooster_game/src/services/game_audio_service.dart';
 
 import '../../../../models/settings/settings.dart';
 
@@ -14,6 +15,9 @@ part 'settings_bloc.freezed.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final SharedPrefsDatabase _sharedPrefsDatabase = SharedPrefsDatabase.instance;
+
+  final GameAudioService _gameAudioService = GameAudioService.instance;
+
   final _key = 'settings2';
 
   SettingsBloc()
@@ -41,6 +45,13 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         settings: settings,
       ),
     );
+    _processSoundSettings();
+  }
+
+  void _processSoundSettings() {
+    state.settings.soundStatus
+        ? _gameAudioService.playBackgroundMusic()
+        : _gameAudioService.pause();
   }
 
   void _update(_Update event, emit) async {
@@ -53,6 +64,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         ),
       ),
     );
+    _processSoundSettings();
+
+
     final data = jsonEncode(
       state.settings.toJson(),
     );

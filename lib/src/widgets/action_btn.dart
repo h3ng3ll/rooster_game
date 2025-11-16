@@ -44,7 +44,7 @@ class _ActionBtnState extends State<ActionBtn> {
           height: widget.height,
           decoration: BoxDecoration(
             image: DecorationImage(
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
               image: AssetImage(
                 Assets.images.actionBtn.path,
               ),

@@ -8,12 +8,13 @@ import 'package:rooster_game/src/models/game_config.dart';
 import 'package:rooster_game/src/pages/game_page/bloc/game_bloc/game_bloc.dart';
 import 'package:rooster_game/src/pages/game_page/flame_component/components/egg.dart';
 import 'package:rooster_game/src/pages/game_page/flame_component/game/game_board.dart';
-import 'package:rooster_game/src/utils/constants/app_constants.dart';
+import 'package:rooster_game/src/pages/settings_page/bloc/settings_bloc/settings_bloc.dart';
 
 class ChickenMatchGame extends FlameGame {
   late GameBoard gameBoard;
   final GameConfig config;
   final GameBloc gameBloc;
+  final SettingsBloc settingsBloc;
 
   ChickenMatchGame({
     super.children,
@@ -21,6 +22,7 @@ class ChickenMatchGame extends FlameGame {
     super.camera,
     required this.config,
     required this.gameBloc,
+    required this.settingsBloc,
   });
 
   @override

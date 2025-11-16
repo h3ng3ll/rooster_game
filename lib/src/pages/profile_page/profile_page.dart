@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rooster_game/src/pages/profile_page/widgets/user_profile.dart';
+import 'package:rooster_game/src/services/ui_message_service.dart';
 import 'package:rooster_game/src/services/ui_overlay_service.dart';
 import 'package:rooster_game/src/widgets/action_btn.dart';
 import 'package:rooster_game/src/widgets/custom_app_bar.dart';
@@ -27,7 +28,6 @@ class _ProfilePageState extends State<ProfilePage> {
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final UIOverlayService _uIOverlayService = UIOverlayService.instance;
-
 
   @override
   void dispose() {
@@ -57,13 +57,17 @@ class _ProfilePageState extends State<ProfilePage> {
         email: emailController.text,
       ),
     );
+    UiMessageService.showInfo(
+      'Profile updated successfully',
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
-
+        final isKeyboard =
+            WidgetsBinding.instance.window.viewInsets.bottom > 0.00;
         if (usernameController.text != state.profile.username) {
           usernameController.text = state.profile.username;
         }
@@ -83,11 +87,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 Spacer(),
               ],
             ),
-            body: Column(
-              children: [
-                Gap(40.0),
-                Expanded(
-                  child: ContentContainer(
+            body: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Gap(40.0),
+                  ContentContainer(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -99,13 +103,14 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        Gap(50.0),
-                        Center(
-                          child: UserProfile(
-                            image: image ?? state.profile.avatar,
-                            onPickImage: onPickImage,
+                        Gap(10.0),
+                        if (!isKeyboard)
+                          Center(
+                            child: UserProfile(
+                              image: image ?? state.profile.avatar,
+                              onPickImage: onPickImage,
+                            ),
                           ),
-                        ),
                         Gap(20.0),
                         Padding(
                           padding: const EdgeInsets.symmetric(
@@ -128,16 +133,17 @@ class _ProfilePageState extends State<ProfilePage> {
                       ],
                     ),
                   ),
-                ),
-                Gap(10.0),
-                ActionBtn(
-                  onTap: onSave,
-                  width: 290.0,
-                  height: 140.0,
-                  text: 'SAVE',
-                  fontSize: 60,
-                ),
-              ],
+                  Gap(10.0),
+                  if (!isKeyboard)
+                    ActionBtn(
+                      onTap: onSave,
+                      width: 290.0,
+                      height: 140.0,
+                      text: 'SAVE',
+                      fontSize: 60,
+                    ),
+                ],
+              ),
             ),
           ),
         );

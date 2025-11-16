@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rooster_game/src/animation/spark_animation.dart';
 
 import '../../../../gen/assets.gen.dart';
+import '../../../widgets/animation/spark_animation.dart';
 import '../../../widgets/padding/horizontal_padding.dart';
 
 class GameFieldBg extends StatelessWidget {

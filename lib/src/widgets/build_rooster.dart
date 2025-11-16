@@ -55,7 +55,7 @@ class _BuildRoosterState extends State<BuildRooster>
               height: widget.height,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                   image: AssetImage(
                     Assets.images.rooster.path,
                   ),

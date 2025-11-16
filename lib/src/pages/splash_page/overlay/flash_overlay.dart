@@ -35,13 +35,7 @@ class _FlashOverlayState extends State<FlashOverlay>
           setState(() {});
         });
 
-    _controller.forward().then(
-      (_) {
-        if (mounted) {
-          Navigator.of(context).pop();
-        }
-      },
-    );
+    _controller.forward();
   }
 
   @override

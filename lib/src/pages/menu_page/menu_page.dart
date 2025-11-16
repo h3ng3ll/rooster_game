@@ -93,45 +93,55 @@ class MenuPage extends StatelessWidget {
                       child: Column(
                         spacing: 15,
                         children: [
-                          ActionBtn(
-                            width: btnSize.width,
-                            height: btnSize.height,
-                            text: 'PROFILE',
-                            onTap: () => onTapProfile(
-                              context,
+                          Expanded(
+                            child: ActionBtn(
+                              width: btnSize.width,
+                              height: btnSize.height,
+                              text: 'PROFILE',
+                              onTap: () => onTapProfile(
+                                context,
+                              ),
                             ),
                           ),
-                          ActionBtn(
-                            width: btnSize.width,
-                            height: btnSize.height,
-                            text: 'SETTINGS',
-                            onTap: () => onTapSettings(
-                              context,
+                          Expanded(
+                            child: ActionBtn(
+                              width: btnSize.width,
+                              height: btnSize.height,
+                              text: 'SETTINGS',
+                              onTap: () => onTapSettings(
+                                context,
+                              ),
                             ),
                           ),
-                          ActionBtn(
-                            width: btnSize.width,
-                            height: btnSize.height,
-                            text: 'LEADERBOARD',
-                            fontSize: 16,
-                            onTap: () => onTapLeaderBoard(
-                              context,
+                          Expanded(
+                            child: ActionBtn(
+                              width: btnSize.width,
+                              height: btnSize.height,
+                              text: 'LEADERBOARD',
+                              fontSize: 16,
+                              onTap: () => onTapLeaderBoard(
+                                context,
+                              ),
                             ),
                           ),
-                          ActionBtn(
-                            width: btnSize.width,
-                            height: btnSize.height,
-                            text: 'PRIVACY POLICY',
-                            onTap: () => onTapPrivacyPolicy(
-                              context,
+                          Expanded(
+                            child: ActionBtn(
+                              width: btnSize.width,
+                              height: btnSize.height,
+                              text: 'PRIVACY POLICY',
+                              onTap: () => onTapPrivacyPolicy(
+                                context,
+                              ),
                             ),
                           ),
-                          ActionBtn(
-                            width: btnSize.width,
-                            height: btnSize.height,
-                            text: 'TERM\n OF USE',
-                            onTap: () => ontTapTermOfUse(
-                              context,
+                          Expanded(
+                            child: ActionBtn(
+                              width: btnSize.width,
+                              height: btnSize.height,
+                              text: 'TERM\n OF USE',
+                              onTap: () => ontTapTermOfUse(
+                                context,
+                              ),
                             ),
                           ),
                         ],

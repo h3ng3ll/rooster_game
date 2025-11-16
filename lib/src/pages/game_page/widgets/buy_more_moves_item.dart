@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rooster_game/src/pages/game_page/widgets/transparent_container.dart';
 
-import '../../../../gen/assets.gen.dart';
 
 class BuyMoreMovesItem extends StatelessWidget {
   final int count;

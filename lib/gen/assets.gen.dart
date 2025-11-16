@@ -11,6 +11,16 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsAudioGen {
+  const $AssetsAudioGen();
+
+  /// File path: assets/audio/background_sound.mp3
+  String get backgroundSound => 'assets/audio/background_sound.mp3';
+
+  /// List of all assets
+  List<String> get values => [backgroundSound];
+}
+
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
@@ -72,6 +82,10 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/hen.png
   AssetGenImage get hen => const AssetGenImage('assets/images/hen.png');
+
+  /// File path: assets/images/ic_launcher.png
+  AssetGenImage get icLauncher =>
+      const AssetGenImage('assets/images/ic_launcher.png');
 
   /// File path: assets/images/ice_egg.png
   AssetGenImage get iceEgg => const AssetGenImage('assets/images/ice_egg.png');
@@ -137,6 +151,7 @@ class $AssetsImagesGen {
     gameFieldBg,
     greenEgg,
     hen,
+    icLauncher,
     iceEgg,
     lemonEgg,
     navBtn,
@@ -158,6 +173,7 @@ class $AssetsImagesGen {
 class Assets {
   const Assets._();
 
+  static const $AssetsAudioGen audio = $AssetsAudioGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
 }

@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:rooster_game/gen/assets.gen.dart';
 import 'package:rooster_game/src/pages/profile_page/widgets/user_profile.dart';
 import 'package:rooster_game/src/resourses/colors/app_colors.dart';
 

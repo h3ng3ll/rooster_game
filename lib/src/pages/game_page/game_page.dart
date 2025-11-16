@@ -23,6 +23,7 @@ import 'package:rooster_game/src/widgets/custom_app_bar.dart';
 
 import '../../bloc/game_stat_bloc/game_stat_bloc.dart';
 import '../../models/shop_items.dart';
+import '../settings_page/bloc/settings_bloc/settings_bloc.dart';
 import 'bloc/game_bloc/game_bloc.dart';
 
 class GamePageArgs {
@@ -64,13 +65,19 @@ class _GamePageState extends State<GamePage> {
     _gameBlocSubscription = _gameBloc.stream.listen(
       (e) async {
         if (e.score > e.config.demandScore) {
+          if (isOpenedDialog) return;
+          isOpenedDialog = true;
           _updateBestScoreIfNeeded();
           _incrementLevelIfUnlocked();
 
           await _showWinDialog();
+          isOpenedDialog = false;
         } else if (e.tries <= 0) {
+          if (isOpenedDialog) return;
+          isOpenedDialog = true;
           _updateBestScoreIfNeeded();
           await _showLoseDialog();
+          isOpenedDialog = false;
         }
       },
     );
@@ -78,6 +85,7 @@ class _GamePageState extends State<GamePage> {
     game = ChickenMatchGame(
       gameBloc: _gameBloc,
       config: GameLevels.levels[widget.args.level],
+      settingsBloc: context.read<SettingsBloc>(),
     );
   }
 
@@ -116,8 +124,6 @@ class _GamePageState extends State<GamePage> {
   }
 
   Future<void> _showWinDialog() async {
-    if (isOpenedDialog) return;
-    isOpenedDialog = true;
     await showDialog(
       context: context,
       barrierDismissible: false,
@@ -130,12 +136,9 @@ class _GamePageState extends State<GamePage> {
         hasNext: _gameBloc.state.level < GameLevels.levels.length,
       ),
     );
-    isOpenedDialog = false;
   }
 
   Future<void> _showLoseDialog() async {
-    if (isOpenedDialog) return;
-    isOpenedDialog = true;
     await showDialog(
       context: context,
       barrierDismissible: false,
@@ -146,7 +149,6 @@ class _GamePageState extends State<GamePage> {
         onTapTryAgain: _onRestartGame,
       ),
     );
-    isOpenedDialog = false;
   }
 
   void _onPause() {
@@ -207,6 +209,7 @@ class _GamePageState extends State<GamePage> {
     game = ChickenMatchGame(
       gameBloc: _gameBloc,
       config: GameLevels.levels[widget.args.level],
+      settingsBloc: context.read<SettingsBloc>(),
     );
   }
 
@@ -217,6 +220,7 @@ class _GamePageState extends State<GamePage> {
     game = ChickenMatchGame(
       config: GameLevels.levels[widget.args.level],
       gameBloc: _gameBloc,
+      settingsBloc: context.read<SettingsBloc>(),
     );
   }
 
@@ -262,9 +266,6 @@ class _GamePageState extends State<GamePage> {
                                 ),
                               ],
                             ),
-                            // BuildCoinBalance(
-                            //   balance: 6,
-                            // ),
                           ],
                         ),
                       ],
